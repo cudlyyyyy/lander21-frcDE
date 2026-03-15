@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollEarn - Online Geld verdienen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-green: #0a2818;
+            --medium-green: #134d32;
+            --light-green: #1a6b47;
+            --accent-green: #00ff9d;
+            --accent-bright: #00ffaa;
+            --dark-bg: #071814;
+            --text-white: #ffffff;
+            --text-gray: #a8c5b8;
+            --error-red: #ff4466;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(ellipse at top, #134d32 0%, #0a2818 50%, #071814 100%);
+            min-height: 100vh;
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 15px;
+            position: relative;
+        }
+
+        header {
+            padding: 15px 0 5px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 20px 0 15px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-headline {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 15px;
+            letter-spacing: -0.03em;
+            color: var(--accent-bright);
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .subheadline {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-white);
+            margin-bottom: 20px;
+            font-weight: 400;
+            animation: fadeIn 0.8s ease-out 0.6s backwards;
+        }
+
+        .age-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
+
+        .age-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .age-btn.primary {
+            background: var(--accent-bright);
+            color: #000;
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .age-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 255, 170, 0.5);
+        }
+
+        .age-btn.secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .age-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .btn-subtitle {
+            font-size: 0.72rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .success-section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--accent-bright);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.8rem;
+            color: #000;
+            animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .success-subtitle {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-gray);
+        }
+
+        .earning-highlight {
+            color: var(--accent-bright);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-bright);
+            border: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            color: #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
+            transition: all 0.3s ease;
+            margin: 18px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 255, 170, 0.5);
+        }
+
+        .prequalified-text {
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        .journey-section {
+            background: rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 18px 14px 6px;
+            margin: 0 0 16px;
+        }
+
+        .journey-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-gray);
+        }
+
+        .step-card {
+            padding: 14px 0;
+            margin-bottom: 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            animation: slideInLeft 0.6s ease-out backwards;
+        }
+
+        .step-card:last-child {
+            border-bottom: none;
+        }
+
+        .step-card:nth-child(1) { animation-delay: 0.2s; }
+        .step-card:nth-child(2) { animation-delay: 0.35s; }
+        .step-card:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-bright);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #000;
+        }
+
+        .step-content h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-white);
+        }
+
+        .step-content p {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        .notice-card {
+            background: rgba(10, 10, 10, 0.6);
+            border: 2px solid rgba(255, 68, 102, 0.6);
+            border-radius: 14px;
+            padding: 14px;
+            margin: 0 0 12px;
+            position: relative;
+            animation: fadeIn 0.8s ease-out 0.8s backwards;
+        }
+
+        .notice-badge {
+            position: absolute;
+            top: -14px;
+            right: 12px;
+            background: var(--error-red);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .notice-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .notice-lock {
+            font-size: 1.2rem;
+        }
+
+        .notice-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-white);
+        }
+
+        .notice-text {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--text-gray);
+        }
+
+        .notice-text strong {
+            color: var(--accent-bright);
+        }
+
+        .trust-badge {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin: 12px 0 15px;
+            animation: fadeIn 1s ease-out 1s backwards;
+        }
+
+        .trust-badge strong {
+            color: var(--accent-bright);
+            font-weight: 700;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header></header>
+
+        <!-- Startseite -->
+        <div id="landingPage">
+            <div class="hero-section">
+                <div class="logo-container">
+                    <div class="app-icon">
+                        <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6106a7e4f66385001d52966b/0x0.png" alt="ScrollEarn">
+                    </div>
+                </div>
+
+                <h1 class="main-headline">Scrolle & Verdiene</h1>
+
+                <p class="subheadline">
+                    Schließ dich tausenden Nutzern an, die täglich Geld verdienen — Videos schauen und sofort auszahlen lassen.
+                </p>
+
+                <div class="age-selection">
+                    <button class="age-btn primary" onclick="showSuccessPage()">
+                        <span>Ich bin über 21</span>
+                        <span class="btn-subtitle">Sofortauszahlung: PayPal, Krypto & Überweisung</span>
+                    </button>
+
+                    <button class="age-btn secondary" onclick="showSuccessPage()">
+                        <span>Ich bin unter 21</span>
+                        <span class="btn-subtitle">Eingeschränkte Auszahlung: nur Banküberweisung</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Erfolgsseite -->
+        <div id="successPage" class="hidden">
+            <div class="success-section">
+                <div class="success-header">
+                    <div class="logo-container">
+                        <div class="app-icon">
+                            <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6106a7e4f66385001d52966b/0x0.png" alt="ScrollEarn">
+                        </div>
+                    </div>
+
+                    <div class="success-icon">✓</div>
+
+                    <h2 class="success-title">Du bist dabei!</h2>
+
+                    <p class="success-subtitle">
+                        Verwandle deine Bildschirmzeit in Geld. Verdiene bis zu <span class="earning-highlight">2.000 $/Woche.</span>
+                    </p>
+                </div>
+
+                <p class="prequalified-text">Dein Konto ist für höhere Auszahlungen vorqualifiziert.<br>Lade die App herunter, um den vollen Zugang zu aktivieren.</p>
+
+                <a href="https://raintrks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YTEwOTZkYTA5OGFmODc1MWVkNzIyNiIsInRzIjoxNzczNjAxOTk2MjE4fQ?s2=DET1" class="cta-button" style="text-decoration: none;">
+                    <span>🍎</span>
+                    <span>Jetzt Herunterladen</span>
+                </a>
+
+                <div class="journey-section">
+                    <h3 class="journey-title">Dein Weg zum Verdienst</h3>
+
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Freecash-App herunterladen & Konto erstellen</h3>
+                            <p>Verfügbar für iOS & Android — in unter 30 Sekunden herunterladen und registrieren</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Tägliche Angebote abschließen</h3>
+                            <p>Netflix schauen, Social Media scrollen, Apps & Spiele testen oder Umfragen ausfüllen!</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Verdienst auszahlen lassen</h3>
+                            <p>Sofortauszahlung: PayPal, Krypto & Überweisung</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-card">
+                    <div class="notice-badge">⚠️ Wichtig</div>
+                    <div class="notice-header">
+                        <span class="notice-lock">🔒</span>
+                        <span class="notice-title">Aktivierung erforderlich</span>
+                    </div>
+                    <p class="notice-text">
+                        Neue Nutzer: Schließe <strong>2 schnelle Angebote</strong> ab, um den vollen Zugang freizuschalten und in wenigen Minuten mit dem Verdienen zu beginnen.
+                    </p>
+                </div>
+
+                <div class="trust-badge">
+                    Von über <strong>500.000 Nutzern</strong> vertraut, die täglich Geld verdienen
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSuccessPage() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('successPage').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
