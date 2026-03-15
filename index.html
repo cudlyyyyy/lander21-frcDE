@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScrollEarn - TikTokを見てお金を稼ごう</title>
+    <title>ScrollEarn - Online Geld verdienen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -28,7 +28,7 @@
         }
 
         body {
-            font-family: 'Noto Sans JP', sans-serif;
+            font-family: 'Outfit', sans-serif;
             background: radial-gradient(ellipse at top, #134d32 0%, #0a2818 50%, #071814 100%);
             min-height: 100vh;
             color: var(--text-white);
@@ -89,18 +89,12 @@
             object-fit: cover;
         }
 
-        .connector {
-            font-size: 1.5rem;
-            color: var(--accent-bright);
-            font-weight: 900;
-        }
-
         .main-headline {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            line-height: 1.1;
+            line-height: 1;
             margin-bottom: 15px;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.03em;
             color: var(--accent-bright);
             animation: fadeIn 0.8s ease-out 0.4s backwards;
         }
@@ -112,7 +106,7 @@
 
         .subheadline {
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-white);
             margin-bottom: 20px;
             font-weight: 400;
@@ -132,8 +126,8 @@
             padding: 16px 20px;
             border-radius: 16px;
             border: none;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
             font-weight: 900;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -208,7 +202,7 @@
 
         .success-subtitle {
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-gray);
         }
 
@@ -224,7 +218,7 @@
             background: var(--accent-bright);
             border: none;
             border-radius: 12px;
-            font-family: 'Noto Sans JP', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 1rem;
             font-weight: 900;
             color: #000;
@@ -248,7 +242,7 @@
         .prequalified-text {
             text-align: center;
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-gray);
             margin-bottom: 18px;
         }
@@ -324,7 +318,7 @@
             background: rgba(10, 10, 10, 0.6);
             border: 2px solid rgba(255, 68, 102, 0.6);
             border-radius: 14px;
-            padding: 14px 14px 14px 14px;
+            padding: 14px;
             margin: 0 0 12px;
             position: relative;
             animation: fadeIn 0.8s ease-out 0.8s backwards;
@@ -363,7 +357,7 @@
 
         .notice-text {
             font-size: 0.82rem;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-gray);
         }
 
@@ -393,110 +387,102 @@
     <div class="container">
         <header></header>
 
-        <!-- ランディングページ -->
+        <!-- Startseite -->
         <div id="landingPage">
             <div class="hero-section">
                 <div class="logo-container">
-                    <div class="app-icon">
-                        <img src="https://images.seeklogo.com/logo-png/37/2/tiktok-app-icon-logo-png_seeklogo-373800.png" alt="TikTok">
-                    </div>
-                    <div class="connector">×</div>
                     <div class="app-icon">
                         <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6106a7e4f66385001d52966b/0x0.png" alt="ScrollEarn">
                     </div>
                 </div>
 
-                <h1 class="main-headline">スクロールしてお金を稼ごう</h1>
-                
+                <h1 class="main-headline">Scrolle & Verdiene</h1>
+
                 <p class="subheadline">
-                    TikTok動画を見るだけで毎日収益を得ている数千人のユーザーに参加して、すぐに現金を受け取りましょう。
+                    Schließ dich tausenden Nutzern an, die täglich Geld verdienen — Videos schauen und sofort auszahlen lassen.
                 </p>
 
                 <div class="age-selection">
                     <button class="age-btn primary" onclick="track('Over 21')">
-                        <span>21歳以上の方</span>
-                        <span class="btn-subtitle">即時出金対応：PayPal・CashApp・Venmo・暗号通貨・電信送金</span>
+                        <span>Ich bin über 21</span>
+                        <span class="btn-subtitle">Sofortauszahlung: PayPal, CashApp, Venmo, Krypto & Überweisung</span>
                     </button>
-                    
+
                     <button class="age-btn secondary" onclick="track('Under 21')">
-                        <span>21歳未満の方</span>
-                        <span class="btn-subtitle">出金制限あり：電信送金のみ</span>
+                        <span>Ich bin unter 21</span>
+                        <span class="btn-subtitle">Eingeschränkte Auszahlung: nur Banküberweisung</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- 成功ページ -->
+        <!-- Erfolgsseite -->
         <div id="successPage" class="hidden">
             <div class="success-section">
                 <div class="success-header">
                     <div class="logo-container">
-                        <div class="app-icon">
-                            <img src="https://images.seeklogo.com/logo-png/37/2/tiktok-app-icon-logo-png_seeklogo-373800.png" alt="TikTok">
-                        </div>
-                        <div class="connector">×</div>
                         <div class="app-icon">
                             <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6106a7e4f66385001d52966b/0x0.png" alt="ScrollEarn">
                         </div>
                     </div>
 
                     <div class="success-icon">✓</div>
-                    
-                    <h2 class="success-title">登録完了！</h2>
-                    
+
+                    <h2 class="success-title">Du bist dabei!</h2>
+
                     <p class="success-subtitle">
-                        スマホの使用時間を収益に変えよう。最大 <span class="earning-highlight">週2,000ドル</span> 稼げます。
+                        Verwandle deine Bildschirmzeit in Geld. Verdiene bis zu <span class="earning-highlight">2.000 $/Woche.</span>
                     </p>
                 </div>
 
-                <p class="prequalified-text">アカウントは高額報酬の事前審査を通過しました。<br>アプリをダウンロードしてフルアクセスを有効化しましょう。</p>
+                <p class="prequalified-text">Dein Konto ist für höhere Auszahlungen vorqualifiziert.<br>Lade die App herunter, um den vollen Zugang zu aktivieren.</p>
 
                 <a href="https://glctrk.org/aff_c?offer_id=3533&aff_id=4344&source=ttfndeatgoo" class="cta-button" style="text-decoration: none;">
                     <span>🍎</span>
-                    <span>今すぐダウンロード</span>
+                    <span>Jetzt Herunterladen</span>
                 </a>
 
                 <div class="journey-section">
-                    <h3 class="journey-title">収益獲得の手順</h3>
+                    <h3 class="journey-title">Dein Weg zum Verdienst</h3>
 
                     <div class="step-card">
                         <div class="step-number">1</div>
                         <div class="step-content">
-                            <h3>Freecashアプリをダウンロードしてアカウントを作成</h3>
-                            <p>iOS・Android対応 — アプリをダウンロードして30秒以内に登録完了</p>
+                            <h3>Freecash-App herunterladen & Konto erstellen</h3>
+                            <p>Verfügbar für iOS & Android — in unter 30 Sekunden herunterladen und registrieren</p>
                         </div>
                     </div>
 
                     <div class="step-card">
                         <div class="step-number">2</div>
                         <div class="step-content">
-                            <h3>毎日のオファーをこなす</h3>
-                            <p>Netflixを見たり、TikTokをスクロールしながらアプリ・ゲームをテストしたり、アンケートに答えよう！</p>
+                            <h3>Tägliche Angebote abschließen</h3>
+                            <p>Netflix schauen, Social Media scrollen, Apps & Spiele testen oder Umfragen ausfüllen!</p>
                         </div>
                     </div>
 
                     <div class="step-card">
                         <div class="step-number">3</div>
                         <div class="step-content">
-                            <h3>報酬を受け取る</h3>
-                            <p>即時出金：PayPal・CashApp・Venmo・暗号通貨・電信送金</p>
+                            <h3>Verdienst auszahlen lassen</h3>
+                            <p>Sofortauszahlung: PayPal, CashApp, Venmo, Krypto & Überweisung</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="notice-card">
-                    <div class="notice-badge">⚠️ 重要</div>
+                    <div class="notice-badge">⚠️ Wichtig</div>
                     <div class="notice-header">
                         <span class="notice-lock">🔒</span>
-                        <span class="notice-title">有効化が必要</span>
+                        <span class="notice-title">Aktivierung erforderlich</span>
                     </div>
                     <p class="notice-text">
-                        新規ユーザーは <strong>2つのクイックオファー</strong> を完了してフルアクセスを解除し、数分以内に収益を開始できます。
+                        Neue Nutzer: Schließe <strong>2 schnelle Angebote</strong> ab, um den vollen Zugang freizuschalten und in wenigen Minuten mit dem Verdienen zu beginnen.
                     </p>
                 </div>
 
                 <div class="trust-badge">
-                    毎日収益を得ている <strong>50万人以上</strong> のユーザーから信頼されています
+                    Von über <strong>500.000 Nutzern</strong> vertraut, die täglich Geld verdienen
                 </div>
             </div>
         </div>
@@ -511,7 +497,7 @@
         // Paste your Google Apps Script Web App URL here
         const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwEOhmxwRliyxHarP4qKC2UzzxvFb7lxZ1dE2G-arazQ1FRByRbO6JZK6P8AvuWWNZ1kg/exec';
 
-        const LANGUAGE = 'Japanese';
+        const LANGUAGE = 'German';
 
         function track(selection) {
             fetch(SHEET_URL, {
