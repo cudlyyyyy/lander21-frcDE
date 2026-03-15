@@ -403,12 +403,12 @@
                 </p>
 
                 <div class="age-selection">
-                    <button class="age-btn primary" onclick="showSuccessPage()">
+                    <button class="age-btn primary" onclick="track('Over 21')">
                         <span>Ich bin über 21</span>
-                        <span class="btn-subtitle">Sofortauszahlung: PayPal, Krypto & Überweisung</span>
+                        <span class="btn-subtitle">Sofortauszahlung: PayPal, CashApp, Venmo, Krypto & Überweisung</span>
                     </button>
 
-                    <button class="age-btn secondary" onclick="showSuccessPage()">
+                    <button class="age-btn secondary" onclick="track('Under 21')">
                         <span>Ich bin unter 21</span>
                         <span class="btn-subtitle">Eingeschränkte Auszahlung: nur Banküberweisung</span>
                     </button>
@@ -437,7 +437,7 @@
 
                 <p class="prequalified-text">Dein Konto ist für höhere Auszahlungen vorqualifiziert.<br>Lade die App herunter, um den vollen Zugang zu aktivieren.</p>
 
-                <a href="https://raintrks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YTEwOTZkYTA5OGFmODc1MWVkNzIyNiIsInRzIjoxNzczNjAxOTk2MjE4fQ?s2=DET1" class="cta-button" style="text-decoration: none;">
+                <a href="https://glctrk.org/aff_c?offer_id=3533&aff_id=4344&source=ttfndeatgoo" class="cta-button" style="text-decoration: none;">
                     <span>🍎</span>
                     <span>Jetzt Herunterladen</span>
                 </a>
@@ -465,7 +465,7 @@
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>Verdienst auszahlen lassen</h3>
-                            <p>Sofortauszahlung: PayPal, Krypto & Überweisung</p>
+                            <p>Sofortauszahlung: PayPal, CashApp, Venmo, Krypto & Überweisung</p>
                         </div>
                     </div>
                 </div>
@@ -489,6 +489,31 @@
     </div>
 
     <script>
+        // ─────────────────────────────────────────
+        // CHANGE THIS each time you reuse the page
+        const CAMPAIGN_ID = 'campaign-001';
+        // ─────────────────────────────────────────
+
+        // Paste your Google Apps Script Web App URL here
+        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwEOhmxwRliyxHarP4qKC2UzzxvFb7lxZ1dE2G-arazQ1FRByRbO6JZK6P8AvuWWNZ1kg/exec';
+
+        const LANGUAGE = 'German';
+
+        function track(selection) {
+            fetch(SHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    campaign: CAMPAIGN_ID,
+                    selection: selection,
+                    language: LANGUAGE
+                })
+            }).catch(() => {});
+            showSuccessPage();
+        }
+
         function showSuccessPage() {
             document.getElementById('landingPage').classList.add('hidden');
             document.getElementById('successPage').classList.remove('hidden');
