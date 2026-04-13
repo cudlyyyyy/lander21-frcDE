@@ -232,6 +232,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            text-decoration: none;
         }
 
         .cta-button:hover {
@@ -387,7 +388,6 @@
     <div class="container">
         <header></header>
 
-        <!-- Startseite -->
         <div id="landingPage">
             <div class="hero-section">
                 <div class="logo-container">
@@ -416,7 +416,6 @@
             </div>
         </div>
 
-        <!-- Erfolgsseite -->
         <div id="successPage" class="hidden">
             <div class="success-section">
                 <div class="success-header">
@@ -437,7 +436,7 @@
 
                 <p class="prequalified-text">Dein Konto ist für höhere Auszahlungen vorqualifiziert.<br>Lade die App herunter, um den vollen Zugang zu aktivieren.</p>
 
-                <a href="https://raintrcks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpLWIiLCJ1IjoiNjlhMTA5NmRhMDk4YWY4NzUxZWQ3MjI2IiwidHMiOjE3NzU2NjUwMTk3MzF9?s2=DEAUCHslideT1" class="cta-button" style="text-decoration: none;">
+                <a href="#" class="cta-button" onclick="handleDownloadClick(); return false;">
                     <span></span>
                     <span>Jetzt Herunterladen</span>
                 </a>
@@ -489,17 +488,50 @@
     </div>
 
     <script>
-        // ─────────────────────────────────────────
-        // CHANGE THIS each time you reuse the page
-        const CAMPAIGN_ID = 'DEAUCHslideT1';
-        // ─────────────────────────────────────────
-
-        // Paste your Google Apps Script Web App URL here
+        const CAMPAIGN_ID = 'DEvidt4';
+        const LANGUAGE = 'German';
+        const BASE_AFFILIATE_LINK = 'https://raintrcks.com/r/eyJ0IjoiZnJlZWNhc2gtY3BpIiwidSI6IjY5YTEwOTZkYTA5OGFmODc1MWVkNzIyNiIsInRzIjoxNzc2MDg0OTg2NjAwfQ';
         const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwEOhmxwRliyxHarP4qKC2UzzxvFb7lxZ1dE2G-arazQ1FRByRbO6JZK6P8AvuWWNZ1kg/exec';
 
-        const LANGUAGE = 'German';
+        function getUrlParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
 
-        function track(selection) {
+        function parseMcAttr() {
+            const raw = getUrlParameter('mc_attr');
+            if (!raw) return {};
+
+            try {
+                const decoded = decodeURIComponent(raw);
+                const result = {};
+
+                decoded.split('..').forEach(part => {
+                    const eqIndex = part.indexOf('=');
+                    if (eqIndex > -1) {
+                        const key = part.slice(0, eqIndex).trim();
+                        const value = part.slice(eqIndex + 1).trim();
+                        result[key] = value;
+                    }
+                });
+
+                return result;
+            } catch (err) {
+                return {};
+            }
+        }
+
+        function getMaxConvClickId() {
+            const mcAttr = parseMcAttr();
+            return mcAttr.m || getUrlParameter('mc_click_id') || '';
+        }
+
+        function getTikTokClickId() {
+            const mcAttr = parseMcAttr();
+            return getUrlParameter('ttclid') || mcAttr.e || '';
+        }
+
+        function logEvent(payload) {
             fetch(SHEET_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -507,11 +539,53 @@
                 body: JSON.stringify({
                     timestamp: new Date().toISOString(),
                     campaign: CAMPAIGN_ID,
-                    selection: selection,
-                    language: LANGUAGE
+                    selection: payload.selection || payload.type || '',
+                    language: LANGUAGE,
+                    mc_click_id: getMaxConvClickId(),
+                    ttclid: getTikTokClickId(),
+                    ...payload
                 })
             }).catch(() => {});
+        }
+
+        function track(selection) {
+            logEvent({
+                type: 'selection',
+                selection: selection
+            });
             showSuccessPage();
+        }
+
+        function buildAffiliateUrl() {
+            const url = new URL(BASE_AFFILIATE_LINK);
+            const clickId = getMaxConvClickId();
+            const ttclid = getTikTokClickId();
+
+            url.searchParams.set('s2', CAMPAIGN_ID);
+
+            if (clickId) {
+                url.searchParams.set('adv1', clickId);
+            }
+
+            if (ttclid && !ttclid.startsWith('__')) {
+                url.searchParams.set('ttclid', ttclid);
+            }
+
+            return url.toString();
+        }
+
+        function handleDownloadClick() {
+            const finalUrl = buildAffiliateUrl();
+
+            logEvent({
+                type: 'click',
+                selection: 'Button Click',
+                outbound_url: finalUrl
+            });
+
+            setTimeout(function () {
+                window.location.href = finalUrl;
+            }, 150);
         }
 
         function showSuccessPage() {
